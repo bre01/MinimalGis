@@ -1,0 +1,11 @@
+C:\Users\bre\Documents\GitHub\MinimalGis\All_lessons\lesson_2\obj\Debug\lesson_2.csproj.AssemblyReference.cache
+C:\Users\bre\Documents\GitHub\MinimalGis\All_lessons\lesson_2\obj\Debug\lesson_2.csproj.SuggestedBindingRedirects.cache
+C:\Users\bre\Documents\GitHub\MinimalGis\All_lessons\lesson_2\obj\Debug\lesson_2.Properties.Resources.resources
+C:\Users\bre\Documents\GitHub\MinimalGis\All_lessons\lesson_2\obj\Debug\lesson_2.csproj.GenerateResource.cache
+C:\Users\bre\Documents\GitHub\MinimalGis\All_lessons\lesson_2\obj\Debug\lesson_2.csproj.CoreCompileInputs.cache
+C:\Users\bre\Documents\GitHub\MinimalGis\All_lessons\lesson_2\bin\Debug\lesson_2.exe.config
+C:\Users\bre\Documents\GitHub\MinimalGis\All_lessons\lesson_2\bin\Debug\lesson_2.exe
+C:\Users\bre\Documents\GitHub\MinimalGis\All_lessons\lesson_2\bin\Debug\lesson_2.pdb
+C:\Users\bre\Documents\GitHub\MinimalGis\All_lessons\lesson_2\obj\Debug\lesson_2.Form1.resources
+C:\Users\bre\Documents\GitHub\MinimalGis\All_lessons\lesson_2\obj\Debug\lesson_2.exe
+C:\Users\bre\Documents\GitHub\MinimalGis\All_lessons\lesson_2\obj\Debug\lesson_2.pdb

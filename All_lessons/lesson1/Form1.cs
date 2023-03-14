@@ -51,11 +51,12 @@ namespace lesson1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //get spatial info
             double x=Convert.ToDouble(textBox1.Text);
             double y=Convert.ToDouble(textBox2.Text);
             string attribute=textBox3.Text;
             GISVertex vertex = new GISVertex(x, y);
-            GISPoint point = new GISPoint(vertex, attribute);
+            GISPoint point = new GISPoint(vertex);
             Graphics graphics = this.CreateGraphics();
             point.DrawPoint(graphics);
             point.DrawAttribute(graphics);

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Security.Cryptography.X509Certificates;
 
 namespace MyGis
 {
@@ -59,18 +60,35 @@ namespace MyGis
         {
             graphics.FillEllipse(new SolidBrush(Color.Red), new Rectangle((int)(centroid.x) - 3, (int)(centroid.y) - 3, 6, 6));
         }
-        public double 
-
-
+        public double GetDistanceThisPointToVertex(GISVertex vertex)
+        {
+            return centroid.GetDistanceThisVToV(vertex);
+        }
     }
-    class GISLine
+    class GISLine : GISSpatial
+    {
+        List<GISVertex> AllVertexs;
+        public override void Draw(Graphics graphics)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    class GISPolygon : GISSpatial
+    {
+        List<GISVertex> Allvertexs;
+        public override void Draw(Graphics graphics)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    /*class GISLine
     {
         List<GISVertex> AllVertexs;
     }
     class GISPolygon
     {
         List<GISVertex> AllVertexs;
-    }
+    }*/
     class GISFeature
     {
         public GISSpatial spatialPart;
@@ -80,11 +98,37 @@ namespace MyGis
             spatialPart = spatial;
             attributePart = attribute;
         }
+        public void Draw(Graphics graphics,bool drawAttributeOrNot,int index)
+        {
+            spatialPart.Draw(graphics);
+            if (drawAttributeOrNot)
+            {
+                attributePart.Draw(graphics, spatialPart.centroid, index);
+            }
+        }
+        public Object GetAttribute(int index)
+        {
+            return attributePart.GetValue(index);
+        }
+
 
     }
     class GISAttribute
     {
         public ArrayList values = new ArrayList();
+        public void AddValue(object o)
+        {
+            values.Add(o); 
+        }
+        public object GetValue(int index)
+        {
+            return values[index];
+        }
+        public void Draw(Graphics graphics,GISVertex location,int index)
+        {
+            graphics.DrawString(values[index].ToString(),new Font("",20),
+                new SolidBrush(Color.Green),new PointF((int)(location.x),(int)(location.y)));
+        }
     }
     abstract class GISSpatial
     {
