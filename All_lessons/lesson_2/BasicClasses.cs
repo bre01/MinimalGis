@@ -58,7 +58,7 @@ namespace MyGis
         }
         public override void Draw(Graphics graphics)
         {
-            graphics.FillEllipse(new SolidBrush(Color.Red), new Rectangle((int)(centroid.x) - 3, (int)(centroid.y) - 3, 6, 6));
+            graphics.FillEllipse(new SolidBrush(Color.Red), new Rectangle((int)centroid.x - 3, (int)centroid.y - 3, 6, 6));
         }
         public double GetDistanceThisPointToVertex(GISVertex vertex)
         {
