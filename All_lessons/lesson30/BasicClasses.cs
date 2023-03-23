@@ -60,7 +60,9 @@ namespace MyGis
         }
         public override void Draw(Graphics graphics,GISView view)
         {
-            graphics.FillEllipse(new SolidBrush(Color.Red), new Rectangle((int)centroid.x - 3, (int)centroid.y - 3, 6, 6));
+            Point screenPoint = view.ToScreenPoint(centroid);
+
+            graphics.FillEllipse(new SolidBrush(Color.Red), new Rectangle((int)screenPoint.x - 3, (int)screenPoint.y - 3, 6, 6));
         }
         public double GetDistanceThisPointToVertex(GISVertex vertex)
         {
