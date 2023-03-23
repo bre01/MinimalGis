@@ -56,7 +56,7 @@ namespace lesson1
             double y=Convert.ToDouble(textBox2.Text);
             string attribute=textBox3.Text;
             GISVertex vertex = new GISVertex(x, y);
-            GISPoint point = new GISPoint(vertex);
+            GISPoint point = new GISPoint(vertex,"string");
             Graphics graphics = this.CreateGraphics();
             point.DrawPoint(graphics);
             point.DrawAttribute(graphics);
@@ -74,15 +74,16 @@ namespace lesson1
             GISVertex clickedVertex=new GISVertex((double)e.X,(double)e.Y);
             double minDistance = double.MaxValue;
             int findID = -1;
-            for (int i=0;i<points.Count;i++)
+            for (int i = 0; i < points.Count; i++)
             {
                 double distance = (points[i]).VertexToPoint(clickedVertex);
 
-                if (distance< minDistance)
+                if (distance < minDistance)
                 {
-                    minDistance=distance;
+                    minDistance = distance;
                     findID = i;
                 }
+            }
                 if(minDistance>5 || findID == -1)
                 {
                     MessageBox.Show("no point detected");
@@ -95,7 +96,6 @@ namespace lesson1
 
                
 
-            }
         }
 
     }
