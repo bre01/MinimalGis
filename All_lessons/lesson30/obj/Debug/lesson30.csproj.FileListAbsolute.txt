@@ -8,3 +8,4 @@ C:\Users\bre\Documents\GitHub\MinimalGis\All_lessons\lesson30\obj\Debug\lesson30
 C:\Users\bre\Documents\GitHub\MinimalGis\All_lessons\lesson30\obj\Debug\lesson30.csproj.CoreCompileInputs.cache
 C:\Users\bre\Documents\GitHub\MinimalGis\All_lessons\lesson30\obj\Debug\lesson30.exe
 C:\Users\bre\Documents\GitHub\MinimalGis\All_lessons\lesson30\obj\Debug\lesson30.pdb
+C:\Users\bre\Documents\GitHub\MinimalGis\All_lessons\lesson30\obj\Debug\lesson_3_form.Form1.resources

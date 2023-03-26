@@ -52,17 +52,18 @@ namespace MyGis
 
     }
     */
-    class GISPoint : GISSpatial {
+    class GISPoint : GISSpatial
+    {
         public GISPoint(GISVertex vertext)
         {
             centroid = vertext;
             extent = new GISExtent(vertext, vertext);
         }
-        public override void Draw(Graphics graphics,GISView view)
+        public override void Draw(Graphics graphics, GISView view)
         {
             Point screenPoint = view.ToScreenPoint(centroid);
 
-            graphics.FillEllipse(new SolidBrush(Color.Red), new Rectangle((int)screenPoint.x - 3, (int)screenPoint.y - 3, 6, 6));
+            graphics.FillEllipse(new SolidBrush(Color.Red), new Rectangle((int)screenPoint.X - 3, (int)screenPoint.Y - 3, 6, 6));
         }
         public double GetDistanceThisPointToVertex(GISVertex vertex)
         {
@@ -72,7 +73,7 @@ namespace MyGis
     class GISLine : GISSpatial
     {
         List<GISVertex> AllVertexs;
-        public override void Draw(Graphics graphics,GISView view)
+        public override void Draw(Graphics graphics, GISView view)
         {
             throw new NotImplementedException();
         }
@@ -80,7 +81,7 @@ namespace MyGis
     class GISPolygon : GISSpatial
     {
         List<GISVertex> Allvertexs;
-        public override void Draw(Graphics graphics,GISView view)
+        public override void Draw(Graphics graphics, GISView view)
         {
             throw new NotImplementedException();
         }
@@ -102,13 +103,12 @@ namespace MyGis
             spatialPart = spatial;
             attributePart = attribute;
         }
-        public void Draw(Graphics graphics,GISView view,bool drawAttributeOrNot,int index)
+        public void Draw(Graphics graphics, GISView view, bool drawAttributeOrNot, int index)
         {
-            spatialPart.Draw(graphics,view);
+            spatialPart.Draw(graphics, view);
             if (drawAttributeOrNot)
             {
-                attributePart.Draw(graphics,view,spatialPart.centroid, index);
-                attributePart.Draw(graphics ,view,spatialPart.centroid, index);
+                attributePart.Draw(graphics, view, spatialPart.centroid, index);
             }
         }
         public Object GetAttribute(int index)
@@ -123,24 +123,24 @@ namespace MyGis
         public ArrayList values = new ArrayList();
         public void AddValue(object o)
         {
-            values.Add(o); 
+            values.Add(o);
         }
         public object GetValue(int index)
         {
             return values[index];
         }
-        public void Draw(Graphics graphics,GISView view,GISVertex location,int index)
+        public void Draw(Graphics graphics, GISView view, GISVertex location, int index)
         {
             Point screenPoint = view.ToScreenPoint(location);
-            graphics.DrawString(values[index].ToString(),new Font("",20),
-                new SolidBrush(Color.Green),new PointF((int)(screenPoint.X),(int)(screenPoint.Y)));
+            graphics.DrawString(values[index].ToString(), new Font("", 20),
+                new SolidBrush(Color.Green), new PointF((int)(screenPoint.X), (int)(screenPoint.Y)));
         }
     }
     abstract class GISSpatial
     {
         public GISVertex centroid;
         public GISExtent extent;
-        public abstract void Draw(Graphics graphics,GISView view);
+        public abstract void Draw(Graphics graphics, GISView view);
     }
     class GISExtent
     {
@@ -151,17 +151,22 @@ namespace MyGis
             this.bottomLeft = bottomLeft;
             this.upRight = upRight;
         }
+        public GISExtent(double x1, double y1, double x2, double y2)
+        {
+            upRight = new GISVertex(Math.Max(x1, x2), Math.Max(y1, y2));
+            bottomLeft = new GISVertex(Math.Min(x1, x2), Math.Min(y1, y2));
+        }
         public double GetMinX()
         {
             return bottomLeft.x;
         }
-        public double GetMaxX() { return upRight.x; }    
+        public double GetMaxX() { return upRight.x; }
 
         public double GetMinY() { return bottomLeft.y; }
-        public double GetMaxY() {  return upRight.y; }
-        public double GetWidth() { return upRight.x-bottomLeft.x; }
-        public double GetHeight() { return upRight.y-bottomLeft.y;}
-            
+        public double GetMaxY() { return upRight.y; }
+        public double GetWidth() { return upRight.x - bottomLeft.x; }
+        public double GetHeight() { return upRight.y - bottomLeft.y; }
+
     }
     class GISView
     {
@@ -172,34 +177,34 @@ namespace MyGis
         double mapW, mapH;
         double scaleX, scaleY;
 
-        public GISView(GISExtent extent,Rectangle rectangle)
+        public GISView(GISExtent extent, Rectangle rectangle)
         {
             Update(extent, rectangle);
         }
-        public void Update(GISExtent extent,Rectangle rectangle)
+        public void Update(GISExtent extent, Rectangle rectangle)
         {
-         this.currentMapExtent = extent;
-        this.mapWindowSize = rectangle;
-        mapMinX=currentMapExtent.GetMinX();
-        mapMinY=currentMapExtent.GetMinY();
-        winW= rectangle.Width;
-            winH= rectangle.Height;
-            mapW=currentMapExtent.GetWidth();
-            mapH= currentMapExtent.GetHeight();
-            scaleX=mapW/winW;
-            scaleY=mapH/winH;
+            this.currentMapExtent = extent;
+            this.mapWindowSize = rectangle;
+            mapMinX = currentMapExtent.GetMinX();
+            mapMinY = currentMapExtent.GetMinY();
+            winW = rectangle.Width;
+            winH = rectangle.Height;
+            mapW = currentMapExtent.GetWidth();
+            mapH = currentMapExtent.GetHeight();
+            scaleX = mapW / winW;
+            scaleY = mapH / winH;
 
         }
         public Point ToScreenPoint(GISVertex vertex)
         {
-            double screenX=(vertex.x-mapMinX)/scaleX;
-            double screenY=winH-(vertex.x-mapMinY)/scaleY;
-            return new Point((int)screenX,(int)screenY);
+            double screenX = (vertex.x - mapMinX) / scaleX;
+            double screenY = winH - (vertex.x - mapMinY) / scaleY;
+            return new Point((int)screenX, (int)screenY);
         }
         public GISVertex ToMapVertex(Point point)
         {
             double MapX = scaleX * point.X + mapMinX;
-            double MapY=scaleY * (winH-point.Y )+ mapMinY;
+            double MapY = scaleY * (winH - point.Y) + mapMinY;
             return new GISVertex(MapX, MapY);
         }
     }
